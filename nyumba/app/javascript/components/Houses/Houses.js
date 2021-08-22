@@ -2,11 +2,31 @@ import React, {useState,useEffect, Fragment} from 'react'
 import axios from 'axios'
 import House from './House'
 import styled from 'styled-components'
-
-const Home =styled.div
-const Header = styled.div
-const Subheader = styled.div
-const Grid = styled.div
+//styling for the Home div
+const Home =styled.div`
+text-align: center;
+max-width: 1200px;
+margin-left: auto;
+margin-right: auto;
+`//styling for the Header div
+const Header = styled.div`
+  padding: 100px 100px 10px 100px;
+  h1{
+    font-size:42px
+  }
+`
+//styling for the subheader div
+const Subheader = styled.div`
+ font-weight: 300;
+ font-size: 26px:
+`
+//styling for the grid div
+const Grid = styled.div`
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ grid-gap:20px;
+ width:100%;
+ padding:20px`
 
 const Houses = () => {
     const [houses, setHouses] = useState([])
@@ -29,19 +49,17 @@ const Houses = () => {
     })
     return(
     
-        <div className="home">
-            <div className ="header">
+        <Home>
+            <Header>
                 <h1>OpenHomes</h1>
-                <p className ="subheader">Honest unbiased house reviews. Share your experience</p>
+                <Subheader>Honest unbiased house reviews. Share your experience</Subheader>
 
-            </div>
-            <div className = "grid">
-                <ul>
-                    {grid}
-                </ul>
+            </Header>
+            <Grid>
+                {grid}
         
-            </div>
-      </div>
+            </Grid>
+      </Home>
     
   )
 }

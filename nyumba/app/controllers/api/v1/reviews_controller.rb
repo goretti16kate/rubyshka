@@ -1,12 +1,12 @@
-module api
-    module v1
+module Api
+    module V1
         class ReviewsController < ApplicationController
             protect_from_forgery with: :null_session
             def create
-                review = Review.new(review_params)
+                review = house.reviews.new(review_params)
         
                 if review.save
-                  render json: HouseSerializer.new(review).serialized_json
+                  render json: ReviewSerializer.new(review).serialized_json
                 else
                   render json: { errors: review.errors.messages }, status: 422
                 end
@@ -22,8 +22,14 @@ module api
                 end
               end
             private
+
+            def house
+              @house ||= House.find(params[:house_id])
+            end
+
             def review_params
                 params.require(:review).permit(:title, :description, :score, :house_id)
+            end
         end
     end
 
